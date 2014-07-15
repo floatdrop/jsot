@@ -20,6 +20,20 @@ jsot.apply({ block: 'html', content: [ 'some', 'tags' ] }, function (err, output
 });
 ```
 
+## Benchmarking results
+
+Some benchmarking results for a while.
+
+```
+                      Simple
+          22,933 op/s » BH
+         102,776 op/s » JSOT
+
+                      Webpage
+          14,896 op/s » BH
+          18,170 op/s » JSOT
+```
+
 ## API
 
 This is pre-alpha version, so API will be changed or modified. Stay tuned!
