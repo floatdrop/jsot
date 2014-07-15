@@ -6,28 +6,36 @@ JSOT.prototype.match = function match(pattern, callback) {
     this._matchers[pattern] = callback;
 };
 
-JSOT.prototype.apply = function apply(json, callback) {
-    var self = this;
+JSOT.prototype.processArray = function processArray(array) {
     var result = '';
-
-    if (typeof json === 'string') {
-        return json;
+    for (var i = 0; i < array.length; i++) {
+        var output = this.apply(array[i]);
+        result = result + output;
     }
+    return result;
+};
 
-    if (json instanceof Array) {
-        for (var i = 0; i < json.length; i++) {
-            result += self.apply(json[i]);
+JSOT.prototype.processObject = function processObject(object) {
+    var result = '';
+    for (var key in this._matchers) {
+        if (object[key]) {
+            return this._matchers[key](object[key], object);
         }
-        return result;
+    }
+    return result;
+};
+
+JSOT.prototype.apply = function apply(json) {
+    if (Array.isArray(json)) {
+        return this.processArray(json);
     }
 
     if (typeof json === 'object') {
-        for (var key in self._matchers) {
-            if (json[key]) {
-                result += self._matchers[key](json[key], json);
-            }
-        }
-        return result;
+        return this.processObject(json);
+    }
+
+    if (typeof json === 'string') {
+        return json;
     }
 };
 

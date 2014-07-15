@@ -15,6 +15,6 @@ jsot.match('block', function (context, parent) {
 function noop () {}
 var bemjson = require('../benchmark/bemjsons/webpage.js');
 
-for (var i = 0; i < 1000; i++) {
+for (var i = 0; i < 10000000; i++) {
     jsot.apply(bemjson, noop);
 }

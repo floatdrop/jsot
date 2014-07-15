@@ -23,12 +23,12 @@ Some benchmarking results for a while.
 
 ```
                       Simple
-          39,317 op/s » BH
-         145,980 op/s » JSOT
+          39,169 op/s » BH
+         140,740 op/s » JSOT
 
                       Webpage
-          14,946 op/s » BH
-          88,879 op/s » JSOT
+          14,268 op/s » BH
+          90,870 op/s » JSOT
 ```
 
 ## API
