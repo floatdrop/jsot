@@ -1,5 +1,3 @@
-var _ = require('lodash');
-
 function JSOT() {
     this._matchers = {};
 }
@@ -12,25 +10,25 @@ JSOT.prototype.apply = function apply(json, callback) {
     var self = this;
     var result = '';
 
-    if (_.isString(json)) {
+    if (typeof json === 'string') {
         return callback(null, json);
     }
 
-    if (_.isArray(json)) {
-        _.forEach(json, function expandItem(item) {
-            self.apply(item, function (err, output) {
+    if (json instanceof Array) {
+        for (var i = 0; i < json.length; i++) {
+            self.apply(json[i], function (err, output) {
                 result += output;
             });
-        });
+        }
         return callback(null, result);
     }
 
-    if (_.isObject(json)) {
-        _.forEach(json, function findMatcher(context, key) {
+    if (typeof json === 'object') {
+        for (var key in json) {
             if (self._matchers[key]) {
-                result += self._matchers[key].bind(self)(context, json);
+                result += self._matchers[key].bind(self)(json[key], json);
             }
-        });
+        }
         return callback(null, result);
     }
 
