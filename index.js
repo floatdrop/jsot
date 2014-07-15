@@ -24,8 +24,8 @@ JSOT.prototype.apply = function apply(json, callback) {
     }
 
     if (typeof json === 'object') {
-        for (var key in json) {
-            if (self._matchers[key]) {
+        for (var key in self._matchers) {
+            if (json[key]) {
                 result += self._matchers[key].bind(self)(json[key], json);
             }
         }
