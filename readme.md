@@ -19,7 +19,7 @@ jsot.apply({ block: 'html', content: [ 'some', 'tags' ] });
 
 ## Benchmarking results
 
-Some benchmarking results for a while.
+Some benchmarking results. It's not a final numbers (but can be used for bottomline), because `jsot` not implementing huge part of BH functionality.
 
 ```
                       Simple
