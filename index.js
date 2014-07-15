@@ -11,28 +11,24 @@ JSOT.prototype.apply = function apply(json, callback) {
     var result = '';
 
     if (typeof json === 'string') {
-        return callback(null, json);
+        return json;
     }
 
     if (json instanceof Array) {
         for (var i = 0; i < json.length; i++) {
-            self.apply(json[i], function (err, output) {
-                result += output;
-            });
+            result += self.apply(json[i]);
         }
-        return callback(null, result);
+        return result;
     }
 
     if (typeof json === 'object') {
         for (var key in self._matchers) {
             if (json[key]) {
-                result += self._matchers[key].bind(self)(json[key], json);
+                result += self._matchers[key](json[key], json);
             }
         }
-        return callback(null, result);
+        return result;
     }
-
-    callback(null, '');
 };
 
 module.exports = JSOT;

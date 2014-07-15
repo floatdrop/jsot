@@ -10,14 +10,11 @@ Some usage examples can be found in `test/benchmark.js` folder. Here one of thos
 var jsot = new JSOT();
 
 jsot.match('block', function(context, parent) {
-    return this.apply(parent.content, function (err, output) {
-        return '<' + context + '>' + output + '</' + context + '>';
-    });
+    return '<' + context + '>' + jsot.apply(parent.content) + '</' + context + '>';
 });
 
-jsot.apply({ block: 'html', content: [ 'some', 'tags' ] }, function (err, output) {
-    // Output should equal '<html>sometags</html>'
-});
+jsot.apply({ block: 'html', content: [ 'some', 'tags' ] });
+// Returns '<html>sometags</html>'
 ```
 
 ## Benchmarking results
@@ -26,12 +23,12 @@ Some benchmarking results for a while.
 
 ```
                       Simple
-          22,933 op/s » BH
-         102,776 op/s » JSOT
+          39,317 op/s » BH
+         145,980 op/s » JSOT
 
                       Webpage
-          14,896 op/s » BH
-          18,170 op/s » JSOT
+          14,946 op/s » BH
+          88,879 op/s » JSOT
 ```
 
 ## API

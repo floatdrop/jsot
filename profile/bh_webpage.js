@@ -26,4 +26,6 @@ bh.match('a', function(ctx) {
 });
 
 var bemjson = require('../benchmark/bemjsons/webpage.js');
-bh.apply(bemjson);
+for (var i = 0; i < 1e5; i++) {
+    bh.apply(bemjson);
+}

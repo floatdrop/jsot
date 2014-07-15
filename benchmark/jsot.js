@@ -2,22 +2,19 @@ var JSOT = require('..');
 var jsot = new JSOT();
 
 jsot.match('block', function (context, parent) {
-    return this.apply(parent.content, function (err, output) {
-        var attrs = '';
-        if (parent.attrs) {
-            attrs = ' ';
-            for (var key in parent.attrs) {
-                attrs = key + '="' + parent.attrs[key] + '"';
-            }
+    var attrs = '';
+    if (parent.attrs) {
+        attrs = ' ';
+        for (var key in parent.attrs) {
+            attrs = key + '="' + parent.attrs[key] + '"';
         }
-        return '<' + context + attrs + '>' + output + '</html>';
-    });
+    }
+    return '<' + context + attrs + '>' + jsot.apply(parent.content) + '</html>';
 });
 
 module.exports = function (bemjson) {
     return function (done) {
-        jsot.apply(bemjson, function (output) {
-            setImmediate(done.bind(null, output));
-        });
+        var html = jsot.apply(bemjson);
+        setImmediate(done.bind(null, html));
     };
 };
