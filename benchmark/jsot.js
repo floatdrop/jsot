@@ -9,7 +9,7 @@ jsot.match('block', function (context, parent) {
             attrs = key + '="' + parent.attrs[key] + '"';
         }
     }
-    return '<' + context + attrs + '>' + jsot.apply(parent.content) + '</html>';
+    return '<' + context + attrs + '>' + jsot.apply(parent.content) + '</' + context + '>';
 });
 
 module.exports = function (bemjson) {
