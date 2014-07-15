@@ -1,0 +1,36 @@
+{
+  "name": "jsot",
+  "version": "0.0.0",
+  "description": "XSLT for JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec",
+    "bench": "matcha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/floatdrop/jsot.git"
+  },
+  "keywords": [
+    "JSON",
+    "XSLT",
+    "templating",
+    "transformations",
+    "declarative"
+  ],
+  "author": "Vsevolod Strukchinsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/floatdrop/jsot/issues"
+  },
+  "homepage": "https://github.com/floatdrop/jsot",
+  "devDependencies": {
+    "bh": "^2.2.0",
+    "matcha": "^0.5.0",
+    "mocha": "^1.20.1",
+    "should": "^4.0.4"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1"
+  }
+}
