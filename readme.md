@@ -22,13 +22,13 @@ jsot.apply({ block: 'html', content: [ 'some', 'tags' ] });
 Some benchmarking results. It's not a final numbers (but can be used for bottomline), because `jsot` not implementing huge part of BH functionality.
 
 ```
-                      Simple
-          39,169 op/s » BH
-         140,740 op/s » JSOT
+                         Simple
+             40,240 op/s » BH
+            144,974 op/s » JSOT
 
-                      Webpage
-          14,268 op/s » BH
-          90,870 op/s » JSOT
+                         Webpage
+             15,158 op/s » BH
+             87,439 op/s » JSOT
 ```
 
 ## API
