@@ -16,13 +16,12 @@ JSOT.prototype.processArray = function processArray(array) {
 };
 
 JSOT.prototype.processObject = function processObject(object) {
-    var result = '';
     for (var key in this._matchers) {
         if (object[key]) {
             return this._matchers[key](object[key], object);
         }
     }
-    return result;
+    return '';
 };
 
 JSOT.prototype.apply = function apply(json) {
