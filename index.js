@@ -25,16 +25,16 @@ JSOT.prototype.processObject = function processObject(object) {
 };
 
 JSOT.prototype.apply = function apply(json) {
+    if (typeof json === 'string') {
+        return json;
+    }
+
     if (Array.isArray(json)) {
         return this.processArray(json);
     }
 
     if (typeof json === 'object') {
         return this.processObject(json);
-    }
-
-    if (typeof json === 'string') {
-        return json;
     }
 };
 
