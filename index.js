@@ -18,7 +18,7 @@ JSOT.prototype.processArray = function processArray(array) {
 JSOT.prototype.processObject = function processObject(object) {
     for (var key in this._matchers) {
         if (object[key]) {
-            return this._matchers[key](object[key], object);
+            return this.apply(this._matchers[key](object[key], object));
         }
     }
     return '';
