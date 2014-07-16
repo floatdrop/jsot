@@ -1,4 +1,4 @@
-# JSOT - JSON object transformation [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
+# JSOT - JSON object transformation [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url] [![Coveralls Status][coveralls-image]][coveralls-url]
 
 This is implementation of some sort of XSLT paradigm, but with JSON object instead of XML.
 
@@ -43,3 +43,6 @@ This is pre-alpha version, so API will be changed or modified. Stay tuned!
 
 [depstat-url]: https://david-dm.org/floatdrop/jsot
 [depstat-image]: https://david-dm.org/floatdrop/jsot.svg?theme=shields.io
+
+[coveralls-url]: https://coveralls.io/r/floatdrop/jsot
+[coveralls-image]: http://img.shields.io/coveralls/floatdrop/jsot/master.svg
