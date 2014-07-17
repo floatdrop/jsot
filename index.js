@@ -1,5 +1,3 @@
-var fast = require('fast.js');
-
 function JSOT() {
     this._matchers = [];
     this._patterns = [];
