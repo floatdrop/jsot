@@ -24,7 +24,7 @@ JSOT.prototype.processObject = function processObject(object) {
         var key = this._patterns[m];
 
         if (typeof key === 'string' && object[key]) {
-            return this.apply(this._matchers[m](object[key], object));
+            return this.apply(this._matchers[m](object[key]));
         }
 
         if (typeof key === 'object' && this.isMatching(key, object)) {
