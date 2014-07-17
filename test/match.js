@@ -21,10 +21,10 @@ describe('match', function () {
     it('should support matching against object', function () {
         var jsot = new JSOT();
 
-        jsot.match({ block: 'html' }, function(context) {
-            return '<html>' + context.body + '</html>';
+        jsot.match({ block: 'html', elem: 'p' }, function(context) {
+            return '<' + context.block + '><' + context.elem + '>' + context.body + '</' + context.elem + '></' + context.block + '>';
         });
 
-        jsot.apply({ block: 'html', body: 'Hello world!' }).should.equal('<html>Hello world!</html>');
+        jsot.apply({ block: 'html', elem: 'p', body: 'Hello world!' }).should.equal('<html><p>Hello world!</p></html>');
     });
 });
