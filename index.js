@@ -1,9 +1,15 @@
+var fast = require('fast.js');
+
 function JSOT() {
-    this._matchers = {};
+    this._matchers = [];
+    this._patterns = [];
 }
 
+JSOT.prototype.isMatching = require('./is_matching');
+
 JSOT.prototype.match = function match(pattern, callback) {
-    this._matchers[pattern] = callback;
+    this._matchers.push(callback);
+    this._patterns.push(pattern);
 };
 
 JSOT.prototype.processArray = function processArray(array) {
@@ -16,9 +22,15 @@ JSOT.prototype.processArray = function processArray(array) {
 };
 
 JSOT.prototype.processObject = function processObject(object) {
-    for (var key in this._matchers) {
-        if (object[key]) {
-            return this.apply(this._matchers[key](object[key], object));
+    for (var m = this._matchers.length; m >= 0; m--) {
+        var key = this._patterns[m];
+
+        if (typeof key === 'string' && object[key]) {
+            return this.apply(this._matchers[m](object[key], object));
+        }
+
+        if (typeof key === 'object' && this.isMatching(key, object)) {
+            return this.apply(this._matchers[m](object));
         }
     }
     return '';
