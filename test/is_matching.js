@@ -1,9 +1,15 @@
 /* global describe, it */
 
-var isMatching = require('../is_matching.js');
+var isMatching = require('..').prototype.isMatching;
 require('should');
 
 describe('isMatching', function () {
+    it('should match complex bh object', function () {
+        var pattern = { block: 'p', blockMods: { bold: 'yes' } };
+        var object = { block: 'p', blockMods: { bold: 'yes' }, content: 'Rock!' };
+        isMatching(pattern, object).should.be.ok;
+    })
+
     it('should be truthy on matching objects', function () {
         var a = { b: 2 }, b = { a: 1, b: 2 };
         isMatching(a, b).should.be.ok;

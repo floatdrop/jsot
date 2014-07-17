@@ -3,7 +3,18 @@ function JSOT() {
     this._patterns = [];
 }
 
-JSOT.prototype.isMatching = require('./is_matching');
+JSOT.prototype.isMatching = function isMatching(a, b) {
+    if (a === b) { return true; }
+
+    if (typeof a === 'object' && typeof b === 'object') {
+        for (var key in a) {
+            if ((b[key] === undefined) || (!isMatching(a[key], b[key]))) { return false; }
+        }
+        return true;
+    }
+
+    return false;
+};
 
 JSOT.prototype.match = function match(pattern, callback) {
     this._matchers.push(callback);
