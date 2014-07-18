@@ -18,7 +18,7 @@ describe('apply', function () {
         var jsot = new JSOT();
 
         jsot.match('block', function(context) {
-            return context;
+            return context.block;
         });
 
         jsot.apply({ block: 'html' }).should.equal('html');

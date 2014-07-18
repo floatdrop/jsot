@@ -3,22 +3,23 @@ function JSOT() {
     this._patterns = [];
 }
 
-JSOT.prototype.isMatching = function isMatching(a, b) {
-    if (a === b) { return true; }
-
-    if (typeof a === 'object' && typeof b === 'object') {
-        for (var key in a) {
-            if ((b[key] === undefined) || (!isMatching(a[key], b[key]))) { return false; }
-        }
-        return true;
-    }
-
-    return false;
-};
-
 JSOT.prototype.match = function match(pattern, callback) {
     this._matchers.push(callback);
     this._patterns.push(pattern);
+};
+
+JSOT.prototype.apply = function apply(json) {
+    if (typeof json === 'string') {
+        return json;
+    }
+
+    if (Array.isArray(json)) {
+        return this.processArray(json);
+    }
+
+    if (typeof json === 'object') {
+        return this.processObject(json);
+    }
 };
 
 JSOT.prototype.processArray = function processArray(array) {
@@ -35,7 +36,11 @@ JSOT.prototype.processObject = function processObject(object) {
         var key = this._patterns[m];
 
         if (typeof key === 'string' && object[key]) {
-            return this.apply(this._matchers[m](object[key]));
+            return this.apply(this._matchers[m](object));
+        }
+
+        if (typeof key === 'function' && key(object)) {
+            this._matchers[m](object);
         }
 
         if (typeof key === 'object' && this.isMatching(key, object)) {
@@ -45,18 +50,53 @@ JSOT.prototype.processObject = function processObject(object) {
     return '';
 };
 
-JSOT.prototype.apply = function apply(json) {
-    if (typeof json === 'string') {
-        return json;
+JSOT.prototype.isMatching = function isMatching(a, b) {
+    if (a === b) { return true; }
+
+    if (typeof a === 'object' && typeof b === 'object') {
+        for (var key in a) {
+            if ((b[key] === undefined) || (!isMatching(a[key], b[key]))) { return false; }
+        }
+        return true;
     }
 
-    if (Array.isArray(json)) {
-        return this.processArray(json);
+    return false;
+};
+
+function escapeIdentifier (id) {
+    if (/^[$A-Z\_a-z][$_0-9A-Za-z]*$/.test(id)) {
+        return '.' + id;
+    }
+    return '["' + id + '"]';
+}
+
+function buildCompareStatement (prefix, object) {
+    var statement = [];
+
+    for (var key in object) {
+        var nextPrefix = prefix + escapeIdentifier(key);
+        if (typeof object[key] === 'object') {
+            statement.push(nextPrefix);
+            statement.push(buildCompareStatement(nextPrefix, object[key]));
+        } else if (typeof object[key] === 'string') {
+            statement.push(nextPrefix + ' === "' + object[key] + '"');
+        } else {
+            statement.push(nextPrefix + ' === ' + object[key]);
+        }
     }
 
-    if (typeof json === 'object') {
-        return this.processObject(json);
-    }
+    return statement.join(' && ');
+}
+
+JSOT.prototype.compilePattern = function compilePatern(pattern) {
+    var statement = typeof pattern !== 'string' ?
+        buildCompareStatement('object', pattern) :
+        'object' + escapeIdentifier(pattern);
+
+    var composedFunction = '    return ' + statement + ';';
+
+    /*jshint -W054*/ /* Yes, this is eval */
+    return new Function('object', composedFunction);
 };
 
 module.exports = JSOT;

@@ -8,11 +8,11 @@ describe('match', function () {
         var jsot = new JSOT();
 
         jsot.match('block', function(context) {
-            return { 'block-wrap': context };
+            return { 'block-wrap': context.block };
         });
 
         jsot.match('block-wrap', function(context) {
-            return '<h1>' + context + '</h1>';
+            return '<h1>' + context['block-wrap'] + '</h1>';
         });
 
         jsot.apply({ block: 'Hello world' }).should.equal('<h1>Hello world</h1>');

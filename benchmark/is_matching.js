@@ -1,4 +1,4 @@
-/* global suite, bench, set */
+/* global suite, bench */
 
 var isMatching = require('..').prototype.isMatching;
 
