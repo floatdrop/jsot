@@ -8,7 +8,7 @@ describe('compilePattern', function () {
         compilePattern('property').toString().should.equal(
             [
             'function anonymous(object) {',
-            '    return object.property;',
+            'return object.property;',
             '}'
             ].join('\n')
         );
@@ -18,7 +18,7 @@ describe('compilePattern', function () {
         compilePattern('prop.erty').toString().should.equal(
             [
             'function anonymous(object) {',
-            '    return object["prop.erty"];',
+            'return object["prop.erty"];',
             '}'
             ].join('\n')
         );
@@ -28,7 +28,7 @@ describe('compilePattern', function () {
         compilePattern({ block: 'html' }).toString().should.equal(
             [
             'function anonymous(object) {',
-            '    return object.block === "html";',
+            'return object.block === "html";',
             '}'
             ].join('\n')
         );
@@ -38,7 +38,7 @@ describe('compilePattern', function () {
         compilePattern({ blockMods: { v: 'yes' } }).toString().should.equal(
             [
             'function anonymous(object) {',
-            '    return object.blockMods && object.blockMods.v === "yes";',
+            'return object.blockMods && object.blockMods.v === "yes";',
             '}'
             ].join('\n')
         );

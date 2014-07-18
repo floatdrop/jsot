@@ -92,7 +92,7 @@ JSOT.prototype.compilePattern = function compilePatern(pattern) {
         buildCompareStatement('object', pattern) :
         'object' + escapeIdentifier(pattern);
 
-    var composedFunction = '    return ' + statement + ';';
+    var composedFunction = 'return ' + statement + ';';
 
     /*jshint -W054*/ /* Yes, this is eval */
     return new Function('object', composedFunction);
