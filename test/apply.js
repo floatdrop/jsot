@@ -5,7 +5,31 @@ require('should');
 
 describe('apply', function () {
 
-    it('should concatinate output from array', function () {
+    it('should set _current.position and _current.length for elements in array of element in array', function () {
+        var jsot = new JSOT();
+        jsot.match({ block: 'li' }, function (context) {
+            return jsot._current.position.toString() + jsot._current.length.toString() + jsot.apply(context.content);
+        });
+
+        jsot.apply([
+            { block: 'li', content: [ { block: 'li', content: 'x' } ] },
+            { block: 'li', content: [ { block: 'li', content: 'x' } ] }
+        ]).should.equal('0201x1201x');
+    });
+
+    it('should set _current.position and _current.length for arrays in array', function () {
+        var jsot = new JSOT();
+        jsot.match({ block: 'li' }, function (context) {
+            return jsot._current.position.toString() + jsot._current.length.toString();
+        });
+
+        jsot.apply([
+            [ { block: 'li' } ],
+            [ { block: 'li' } ]
+        ]).should.equal('0101');
+    });
+
+    it('should set _current.position and _current.length for elements in array', function () {
         var jsot = new JSOT();
         jsot.match({ block: 'li' }, function () {
             return jsot._current.position.toString() + jsot._current.length.toString();
