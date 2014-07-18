@@ -2,7 +2,7 @@
 
 var isMatching = require('..').prototype.isMatching;
 
-suite('isMatching', function () {
+suite('recursiveMatching', function () {
     bench('simple values', function () {
         return isMatching('a', 'a') === true;
     });

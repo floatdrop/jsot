@@ -5,7 +5,7 @@ function JSOT() {
 
 JSOT.prototype.match = function match(pattern, callback) {
     this._matchers.push(callback);
-    this._patterns.push(pattern);
+    this._patterns.push(this.compilePattern(pattern));
 };
 
 JSOT.prototype.apply = function apply(json) {
@@ -38,9 +38,8 @@ JSOT.prototype.processObject = function processObject(object) {
         if (typeof key === 'string' && object[key]) {
             return this.apply(this._matchers[m](object));
         }
-
         if (typeof key === 'function' && key(object)) {
-            this._matchers[m](object);
+            return this.apply(this._matchers[m](object));
         }
 
         if (typeof key === 'object' && this.isMatching(key, object)) {
