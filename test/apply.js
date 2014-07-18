@@ -4,6 +4,16 @@ var JSOT = require('..');
 require('should');
 
 describe('apply', function () {
+
+    it('should concatinate output from array', function () {
+        var jsot = new JSOT();
+        jsot.match({ block: 'li' }, function () {
+            return jsot._current.position.toString() + jsot._current.length.toString();
+        });
+
+        jsot.apply([{ block: 'li' }]).should.equal('01');
+    });
+
     it('should concatinate output from array', function () {
         var jsot = new JSOT();
         jsot.apply(['some', ' ', 'string']).should.equal('some string');

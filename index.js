@@ -26,8 +26,8 @@ JSOT.prototype.apply = function apply(json) {
 
 JSOT.prototype.processArray = function processArray(array) {
     var result = '';
-    this._current.length = array.length;
     for (var i = 0; i < array.length; i++) {
+        this._current.length = array.length;
         this._current.position = i;
         var output = this.apply(array[i]);
         result = result + output;
