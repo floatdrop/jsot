@@ -5,6 +5,16 @@ require('should');
 
 describe('apply', function () {
 
+    it('should set _current.element for element', function () {
+        var jsot = new JSOT();
+        jsot.match({ block: 'li' }, function (context) {
+            jsot._current.element.tag = 'unli';
+            return '<' + context.tag + '></' + context.tag + '>';
+        });
+
+        jsot.apply({ block: 'li', tag: 'li' }).should.equal('<unli></unli>');
+    });
+
     it('should set _current.position and _current.length for elements in array of element in array', function () {
         var jsot = new JSOT();
         jsot.match({ block: 'li' }, function (context) {
@@ -19,7 +29,7 @@ describe('apply', function () {
 
     it('should set _current.position and _current.length for arrays in array', function () {
         var jsot = new JSOT();
-        jsot.match({ block: 'li' }, function (context) {
+        jsot.match({ block: 'li' }, function () {
             return jsot._current.position.toString() + jsot._current.length.toString();
         });
 
