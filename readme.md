@@ -9,8 +9,8 @@ Some usage examples can be found in `test/benchmark.js` folder. Here one of thos
 ```js
 var jsot = new JSOT();
 
-jsot.match('block', function(context, parent) {
-    return '<' + context + '>' + jsot.apply(parent.content) + '</' + context + '>';
+jsot.match('block', function(context) {
+    return '<' + context.block + '>' + jsot.apply(context.content) + '</' + context.block + '>';
 });
 
 jsot.apply({ block: 'html', content: [ 'some', 'tags' ] });
@@ -19,20 +19,38 @@ jsot.apply({ block: 'html', content: [ 'some', 'tags' ] });
 
 ## Benchmarking results
 
-Some benchmarking results. It's not a final numbers (but can be used for bottomline), because `jsot` not implementing huge part of BH functionality.
+Benchmarks of internal functionality.
 
 ```
+                      apply without matches
+     105,442,052 op/s » simple value
+       3,097,503 op/s » short array
+      11,301,935 op/s » object with out matching property
+      11,344,759 op/s » object with matching property
+
+                      apply with match
+      92,088,004 op/s » simple value
+       3,080,371 op/s » short array
+       9,278,109 op/s » object with out matching property
+       2,495,744 op/s » object with matching property
+
+                      apply with multiple matches
+      93,360,287 op/s » simple value
+       3,070,958 op/s » short array
+       2,987,711 op/s » object with out matching property
+       1,722,332 op/s » object with matching property
+
                       compilePattern
-      85,485,938 op/s » simple values
-      71,320,633 op/s » simple objects
-      51,569,471 op/s » bh object
-      38,653,995 op/s » bh complex object
+      79,332,043 op/s » simple values
+      77,350,453 op/s » simple objects
+      50,517,169 op/s » bh object
+      38,811,369 op/s » bh complex object
 
                       recursiveMatching
-      90,662,768 op/s » simple values
-      21,239,967 op/s » simple objects
-       8,886,803 op/s » bh object
-       5,190,468 op/s » bh complex object
+      94,364,123 op/s » simple values
+      21,324,664 op/s » simple objects
+       8,775,628 op/s » bh object
+       5,192,937 op/s » bh complex object
 ```
 
 ## API

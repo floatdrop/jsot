@@ -1,6 +1,7 @@
 function JSOT() {
     this._matchers = [];
     this._patterns = [];
+    this._current = undefined;
 }
 
 JSOT.prototype.match = function match(pattern, callback) {
@@ -32,6 +33,8 @@ JSOT.prototype.processArray = function processArray(array) {
 };
 
 JSOT.prototype.processObject = function processObject(object) {
+    this._current = object;
+
     for (var m = this._matchers.length; m >= 0; m--) {
         var key = this._patterns[m];
 

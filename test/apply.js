@@ -6,7 +6,7 @@ require('should');
 describe('apply', function () {
     it('should concatinate output from array', function () {
         var jsot = new JSOT();
-        jsot.apply([ 'some', ' ', 'string']).should.equal('some string');
+        jsot.apply(['some', ' ', 'string']).should.equal('some string');
     });
 
     it('should return string as is', function () {
