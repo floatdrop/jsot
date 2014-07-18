@@ -23,34 +23,34 @@ Benchmarks of internal functionality.
 
 ```
                       apply without matches
-     105,442,052 op/s » simple value
-       3,097,503 op/s » short array
-      11,301,935 op/s » object with out matching property
-      11,344,759 op/s » object with matching property
+     103,919,581 op/s » simple value
+       2,819,411 op/s » short array
+      11,970,026 op/s » object with out matching property
+      11,974,662 op/s » object with matching property
 
                       apply with match
-      92,088,004 op/s » simple value
-       3,080,371 op/s » short array
-       9,278,109 op/s » object with out matching property
-       2,495,744 op/s » object with matching property
+      92,455,116 op/s » simple value
+       2,792,904 op/s » short array
+       9,769,793 op/s » object with out matching property
+       2,911,795 op/s » object with matching property
 
                       apply with multiple matches
-      93,360,287 op/s » simple value
-       3,070,958 op/s » short array
-       2,987,711 op/s » object with out matching property
-       1,722,332 op/s » object with matching property
+      91,818,607 op/s » simple value
+       2,800,602 op/s » short array
+       3,014,903 op/s » object with out matching property
+       1,767,568 op/s » object with matching property
 
                       compilePattern
-      79,332,043 op/s » simple values
-      77,350,453 op/s » simple objects
-      50,517,169 op/s » bh object
-      38,811,369 op/s » bh complex object
+      80,263,295 op/s » simple values
+      76,368,544 op/s » simple objects
+      51,819,063 op/s » bh object
+      39,259,520 op/s » bh complex object
 
                       recursiveMatching
-      94,364,123 op/s » simple values
-      21,324,664 op/s » simple objects
-       8,775,628 op/s » bh object
-       5,192,937 op/s » bh complex object
+      93,816,521 op/s » simple values
+      21,492,472 op/s » simple objects
+       8,277,127 op/s » bh object
+       5,112,021 op/s » bh complex object
 ```
 
 ## API
