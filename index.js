@@ -1,7 +1,8 @@
 function JSOT() {
     this._matchers = [];
     this._patterns = [];
-    this._current = undefined;
+
+    this._current = { length: -1, position: -1 };
 }
 
 JSOT.prototype.match = function match(pattern, callback) {
@@ -25,7 +26,9 @@ JSOT.prototype.apply = function apply(json) {
 
 JSOT.prototype.processArray = function processArray(array) {
     var result = '';
+    this._current.length = array.length;
     for (var i = 0; i < array.length; i++) {
+        this._current.position = i;
         var output = this.apply(array[i]);
         result = result + output;
     }
@@ -33,8 +36,6 @@ JSOT.prototype.processArray = function processArray(array) {
 };
 
 JSOT.prototype.processObject = function processObject(object) {
-    this._current = object;
-
     for (var m = this._matchers.length; m >= 0; m--) {
         var key = this._patterns[m];
 
