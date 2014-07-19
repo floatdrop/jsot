@@ -4,6 +4,16 @@ var JSOT = require('..');
 require('should');
 
 describe('match', function () {
+    it('should accept functions as a matchers', function () {
+        var jsot = new JSOT();
+
+        jsot.match(function () { return true; }, function(context) {
+            return 'Bingo!';
+        });
+
+        jsot.apply({ block: 'Hello world' }).should.equal('Bingo!');
+    });
+
     it('should reapply jsot, when match returns object', function () {
         var jsot = new JSOT();
 

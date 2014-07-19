@@ -7,7 +7,11 @@ function JSOT() {
 
 JSOT.prototype.match = function match(pattern, callback) {
     this._matchers.push(callback.bind(this));
-    this._patterns.push(this.compilePattern(pattern));
+    if (typeof pattern === 'object') {
+        this._patterns.push(this.compilePattern(pattern));
+    } else {
+        this._patterns.push(pattern);
+    }
 };
 
 JSOT.prototype.apply = function apply(json) {
