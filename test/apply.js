@@ -5,6 +5,19 @@ require('should');
 
 describe('apply', function () {
 
+    it('should continue to apply matchers for block, that returned undefined ', function () {
+        var jsot = new JSOT();
+        jsot.match({ block: 'li' }, function (context) {
+            return '<' + context.tag + '/>';
+        });
+
+        jsot.match({ block: 'li' }, function (context) {
+            context.tag = 'li';
+        });
+
+        jsot.apply({ block: 'li'}).should.equal('<li/>');
+    });
+
     it('should set _current.element for element', function () {
         var jsot = new JSOT();
         jsot.match({ block: 'li' }, function (context) {
@@ -68,13 +81,13 @@ describe('apply', function () {
         jsot.apply({ block: 'html' }).should.equal('html');
     });
 
-    it('should return empty string, if matcher not found', function () {
+    it('should return source object, if matcher not found', function () {
         var jsot = new JSOT();
 
         jsot.match('block', function(context) {
             return context;
         });
 
-        jsot.apply({ flock: 'xml' }).should.equal('');
+        jsot.apply({ flock: 'xml' }).should.eql({ flock: 'xml' });
     });
 });

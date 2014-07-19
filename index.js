@@ -41,19 +41,18 @@ JSOT.prototype.processObject = function processObject(object) {
     for (var m = this._matchers.length - 1; m >= 0; m--) {
         var key = this._patterns[m];
 
-        if (typeof key === 'string' && object[key]) {
-            return this.apply(this._matchers[m](object));
-        }
-
-        if (typeof key === 'function' && key(object)) {
-            return this.apply(this._matchers[m](object));
-        }
-
-        if (typeof key === 'object' && this.isMatching(key, object)) {
-            return this.apply(this._matchers[m](object));
+        if ((typeof key === 'string' && object[key]) ||
+            (typeof key === 'function' && key(object)) ||
+            (typeof key === 'object' && this.isMatching(key, object))
+        ) {
+            var result = this._matchers[m](object);
+            if (result) {
+                return this.apply(result);
+            }
         }
     }
-    return '';
+
+    return object;
 };
 
 JSOT.prototype.isMatching = function isMatching(a, b) {
