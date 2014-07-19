@@ -5,7 +5,9 @@ require('should');
 
 describe('apply', function () {
 
-    it('should continue to apply matchers for block, that returned undefined ', function () {
+    it('should preserve _current element in recursion');
+
+    it('should continue to apply matchers for block, that returned undefined', function () {
         var jsot = new JSOT();
         jsot.match({ block: 'li' }, function (context) {
             return '<' + context.tag + '/>';

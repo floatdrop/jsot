@@ -40,8 +40,6 @@ JSOT.prototype.processArray = function processArray(array) {
 };
 
 JSOT.prototype.processObject = function processObject(object) {
-    this._current.element = object;
-
     for (var m = this._matchers.length - 1; m >= 0; m--) {
         var key = this._patterns[m];
 
@@ -49,6 +47,7 @@ JSOT.prototype.processObject = function processObject(object) {
             (typeof key === 'function' && key(object)) ||
             (typeof key === 'object' && this.isMatching(key, object))
         ) {
+            this._current.element = object;
             var result = this._matchers[m](object);
             if (result) {
                 return this.apply(result);
