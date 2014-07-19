@@ -26,11 +26,11 @@ JSOT.prototype.apply = function apply(json) {
 
 JSOT.prototype.processArray = function processArray(array) {
     var result = '';
-    for (var i = 0; i < array.length; i++) {
+    for (var i = array.length - 1; i >= 0; i--) {
         this._current.length = array.length;
         this._current.position = i;
         var output = this.apply(array[i]);
-        result = result + output;
+        result = output + result;
     }
     return result;
 };
@@ -38,12 +38,13 @@ JSOT.prototype.processArray = function processArray(array) {
 JSOT.prototype.processObject = function processObject(object) {
     this._current.element = object;
 
-    for (var m = this._matchers.length; m >= 0; m--) {
+    for (var m = this._matchers.length - 1; m >= 0; m--) {
         var key = this._patterns[m];
 
         if (typeof key === 'string' && object[key]) {
             return this.apply(this._matchers[m](object));
         }
+
         if (typeof key === 'function' && key(object)) {
             return this.apply(this._matchers[m](object));
         }
