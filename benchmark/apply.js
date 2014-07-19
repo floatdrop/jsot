@@ -21,14 +21,14 @@ function benches(jsot) {
 }
 
 suite('apply without matches', function () {
-    set('mintime', 2000);
+    // set('mintime', 2000);
 
     var jsot = new JSOT();
     benches(jsot);
 });
 
 suite('apply with match', function () {
-    set('mintime', 2000);
+    // set('mintime', 2000);
 
     var jsot = new JSOT();
 
@@ -40,7 +40,7 @@ suite('apply with match', function () {
 });
 
 suite('apply with multiple matches', function () {
-    set('mintime', 2000);
+    // set('mintime', 2000);
 
     var jsot = new JSOT();
 

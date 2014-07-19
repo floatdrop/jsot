@@ -83,41 +83,41 @@ Returns string with transformed result.
 Benchmarks of internal functionality.
 
 ```
-                     apply without matches
-     102,511,469 op/s » simple value
-       2,916,326 op/s » short array
-      32,024,844 op/s » object with out matching property
-      32,166,685 op/s » object with matching property
+                      apply without matches
+     101,707,826 op/s » simple value
+       2,872,773 op/s » short array
+      30,948,360 op/s » object with out matching property
+      30,942,242 op/s » object with matching property
 
                       apply with match
-      92,297,951 op/s » simple value
-       2,919,922 op/s » short array
-       7,182,980 op/s » object with out matching property
-       2,015,169 op/s » object with matching property
+      87,199,363 op/s » simple value
+       2,957,711 op/s » short array
+      22,988,907 op/s » object with out matching property
+       2,160,836 op/s » object with matching property
 
                       apply with multiple matches
-      77,385,274 op/s » simple value
-       2,055,828 op/s » short array
-         506,693 op/s » object with out matching property
-         445,118 op/s » object with matching property
+      88,600,067 op/s » simple value
+       2,908,635 op/s » short array
+       7,156,239 op/s » object with out matching property
+       1,599,449 op/s » object with matching property
 
                       compilePattern
-      78,859,246 op/s » simple values
-      77,580,939 op/s » simple objects
-      49,731,159 op/s » bh object
-      38,835,659 op/s » bh complex object
+      77,000,156 op/s » simple values
+      74,135,502 op/s » simple objects
+      42,939,839 op/s » bh object
+      32,273,702 op/s » bh complex object
 
                       recursiveMatching
-      96,028,177 op/s » simple values
-      21,515,630 op/s » simple objects
-       8,921,614 op/s » bh object
-       5,189,866 op/s » bh complex object
+      90,930,827 op/s » simple values
+      18,900,108 op/s » simple objects
+       7,933,644 op/s » bh object
+       4,263,322 op/s » bh complex object
 
                       staticFunction
-      51,429,121 op/s » block
-      24,190,985 op/s » block_mod
-      37,804,009 op/s » block__elem
-      13,401,564 op/s » block_mod__elem_mod
+      45,792,933 op/s » block
+      18,946,571 op/s » block_mod
+      34,840,615 op/s » block__elem
+      11,880,409 op/s » block_mod__elem_mod
 ```
 
 [npm-url]: https://npmjs.org/package/jsot

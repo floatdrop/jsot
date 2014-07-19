@@ -7,10 +7,10 @@ function JSOT() {
 
 JSOT.prototype.match = function match(pattern, callback) {
     this._matchers.push(callback.bind(this));
-    if (typeof pattern === 'object') {
-        this._patterns.push(this.compilePattern(pattern));
-    } else {
+    if (typeof pattern === 'function') {
         this._patterns.push(pattern);
+    } else {
+        this._patterns.push(this.compilePattern(pattern));
     }
 };
 
@@ -41,17 +41,10 @@ JSOT.prototype.processArray = function processArray(array) {
 
 JSOT.prototype.processObject = function processObject(object) {
     for (var m = this._matchers.length - 1; m >= 0; m--) {
-        var key = this._patterns[m];
-
-        if ((typeof key === 'string' && object[key]) ||
-            (typeof key === 'function' && key(object)) ||
-            (typeof key === 'object' && this.isMatching(key, object))
-        ) {
+        if (this._patterns[m](object)) {
             this._current.element = object;
             var result = this._matchers[m](object);
-            if (result) {
-                return this.apply(result);
-            }
+            if (result) { return this.apply(result); }
         }
     }
 
