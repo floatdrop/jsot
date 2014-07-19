@@ -1,8 +1,10 @@
-/* global suite, bench */
+/* global suite, bench, set */
 
 var compilePattern = require('..').prototype.compilePattern;
 
 suite('compilePattern', function () {
+    set('mintime', 2000);
+
     var compiledSimpleValuePattern = compilePattern('a');
     bench('simple values', function () {
         return compiledSimpleValuePattern({ a: false }) === true;

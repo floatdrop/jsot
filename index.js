@@ -6,7 +6,7 @@ function JSOT() {
 }
 
 JSOT.prototype.match = function match(pattern, callback) {
-    this._matchers.push(callback);
+    this._matchers.push(callback.bind(this));
     this._patterns.push(this.compilePattern(pattern));
 };
 

@@ -1,4 +1,4 @@
-/* global suite, bench */
+/* global suite, bench, set */
 
 var JSOT = require('..');
 
@@ -21,11 +21,15 @@ function benches(jsot) {
 }
 
 suite('apply without matches', function () {
+    set('mintime', 2000);
+
     var jsot = new JSOT();
     benches(jsot);
 });
 
 suite('apply with match', function () {
+    set('mintime', 2000);
+
     var jsot = new JSOT();
 
     jsot.match('block0', function(context) {
@@ -36,6 +40,8 @@ suite('apply with match', function () {
 });
 
 suite('apply with multiple matches', function () {
+    set('mintime', 2000);
+
     var jsot = new JSOT();
 
     for (var i = 0; i < 10; i ++) {

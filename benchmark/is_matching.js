@@ -1,8 +1,10 @@
-/* global suite, bench */
+/* global suite, bench, set */
 
 var isMatching = require('..').prototype.isMatching;
 
 suite('recursiveMatching', function () {
+    set('mintime', 2000);
+
     bench('simple values', function () {
         return isMatching('a', 'a') === true;
     });

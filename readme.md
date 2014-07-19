@@ -10,7 +10,7 @@ Some usage examples can be found in `test/benchmark.js` folder. Here one of thos
 var jsot = new JSOT();
 
 jsot.match('block', function(context) {
-    return '<' + context.block + '>' + jsot.apply(context.content) + '</' + context.block + '>';
+    return '<' + context.block + '>' + this.apply(context.content) + '</' + context.block + '>';
 });
 
 jsot.apply({ block: 'html', content: [ 'some', 'tags' ] });
@@ -84,40 +84,40 @@ Benchmarks of internal functionality.
 
 ```
                       apply without matches
-     100,867,284 op/s » simple value
-       2,880,949 op/s » short array
-      27,257,141 op/s » object with out matching property
-      32,103,154 op/s » object with matching property
+     103,389,431 op/s » simple value
+       3,011,730 op/s » short array
+      32,379,635 op/s » object with out matching property
+      32,560,504 op/s » object with matching property
 
                       apply with match
-      91,391,926 op/s » simple value
-       2,466,478 op/s » short array
-      22,656,426 op/s » object with out matching property
-       3,628,929 op/s » object with matching property
+      91,252,892 op/s » simple value
+       2,987,821 op/s » short array
+      23,274,050 op/s » object with out matching property
+       2,421,787 op/s » object with matching property
 
                       apply with multiple matches
-      92,054,506 op/s » simple value
-       2,682,782 op/s » short array
-       4,062,708 op/s » object with out matching property
-       2,015,560 op/s » object with matching property
+      90,463,954 op/s » simple value
+       3,041,107 op/s » short array
+       4,000,285 op/s » object with out matching property
+       1,534,223 op/s » object with matching property
 
                       compilePattern
-      76,996,711 op/s » simple values
-      71,419,569 op/s » simple objects
-      42,186,884 op/s » bh object
-      38,108,248 op/s » bh complex object
+      80,961,900 op/s » simple values
+      77,591,186 op/s » simple objects
+      52,985,442 op/s » bh object
+      38,981,696 op/s » bh complex object
 
                       recursiveMatching
-      94,390,673 op/s » simple values
-      21,526,423 op/s » simple objects
-       8,962,077 op/s » bh object
-       5,122,471 op/s » bh complex object
+     102,294,997 op/s » simple values
+      21,533,724 op/s » simple objects
+       8,999,456 op/s » bh object
+       5,313,999 op/s » bh complex object
 
                       staticFunction
-      50,124,307 op/s » block
-      23,424,692 op/s » block_mod
-      37,083,737 op/s » block__elem
-      13,003,672 op/s » block_mod__elem_mod
+      54,691,285 op/s » block
+      23,976,082 op/s » block_mod
+      37,837,548 op/s » block__elem
+      12,329,327 op/s » block_mod__elem_mod
 ```
 
 [npm-url]: https://npmjs.org/package/jsot

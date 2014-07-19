@@ -1,4 +1,4 @@
-/* global suite, bench */
+/* global suite, bench, set */
 
 function isMatching (a, b) {
     if (a.block !== b.block) { return false; }
@@ -27,6 +27,8 @@ function isMatching (a, b) {
 }
 
 suite('staticFunction', function () {
+    set('mintime', 2000);
+
     bench('block', function () {
         return isMatching({ block: 'a' }, { block: 'a' }) === true;
     });
